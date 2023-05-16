@@ -679,7 +679,7 @@ public class ContractService {
      * @throws IOException
      */
     private void initDefaultContract(String groupId) throws IOException {
-        String contractPath = "template";
+        String contractPath = "conf/template";
         List<Contract> contracts =
             contractRepository.findByGroupIdAndContractPath(groupId, contractPath);
         // if no template contracts in db, load contract file in template; else, not load

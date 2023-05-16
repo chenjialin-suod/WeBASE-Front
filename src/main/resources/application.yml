@@ -11,7 +11,7 @@ server:
 
 sdk:
   useSmSsl: true  # sdk whether enable sm ssl(guomi)
-  peers: ['172.18.200.133:20200','172.18.200.134:20201']
+  peers: ['192.168.18.17:20201','172.18.200.134:20200','172.18.200.133:20202','172.18.200.132:20203']
   certPath: conf  # sdk cert path of relative or absolute, default 'conf'
   threadPoolSize: 50 # thread pool of sdk
 

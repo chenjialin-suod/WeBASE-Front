@@ -5,10 +5,12 @@ MAINTAINER qkd90
 RUN mkdir -p /webase-front/server
 RUN mkdir -p /webase-front/server/logs
 RUN mkdir -p /webase-front/server/temp
+# run with 'sdk' volume
+RUN mkdir -p /dist/sdk
 
-
+WORKDIR /dist
+ENV CLASSPATH "/dist/conf/:/dist/apps/*:/dist/lib/*"
 WORKDIR /webase-front/server
-
 ENV SERVER_PORT=5002
 # 声明服务运行在9999端口
 EXPOSE ${SERVER_PORT}

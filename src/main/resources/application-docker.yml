@@ -11,9 +11,9 @@ server:
     max-connections: 10000
 
 sdk:
-  useSmSsl: ${USE_SM_SSL:false}  # sdk whether enable sm ssl(guomi)
+  useSmSsl: ${USE_SM_SSL:true}  # sdk whether enable sm ssl(guomi)
   certPath: conf  # sdk cert path of relative or absolute
-  peers: ${PEERS:"['127.0.0.1:20200','127.0.0.1:20201']"}
+  peers: ${PEERS:"['192.168.18.17:20201','172.18.200.134:20200','172.18.200.133:20202','172.18.200.132:20203']"}
   threadPoolSize: 50 # thread pool of sdk
 
 spring:
@@ -67,7 +67,7 @@ logging:
     com.webank.webase.front: info
 
 constant:
-  keyServer: 127.0.0.1:5004 # webase-sign服务的IP:Port（单个）
+  keyServer: 192.168.18.17:5004 # webase-sign服务的IP:Port（单个）
   aesKey: EfdsW23D23d3df43
   transMaxWait: 30
   http_read_timeOut: 100000
