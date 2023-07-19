@@ -20,21 +20,24 @@ import com.webank.webase.front.event.callback.ContractEventCallback;
 import com.webank.webase.front.event.callback.NewBlockEventCallback;
 import com.webank.webase.front.event.entity.EventTopicParam;
 import com.webank.webase.front.event.entity.EventTopicParam.IndexedParamType;
+import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.concurrent.ConcurrentHashMap;
 import org.fisco.bcos.sdk.v3.codec.abi.tools.TopicTools;
 import org.fisco.bcos.sdk.v3.crypto.CryptoSuite;
 import org.fisco.bcos.sdk.v3.eventsub.EventSubParams;
 import org.fisco.bcos.sdk.v3.utils.Hex;
+import org.fisco.bcos.sdk.v3.utils.Numeric;
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.DirectExchange;
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.rabbit.core.RabbitAdmin;
-
-import java.math.BigInteger;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author marsli

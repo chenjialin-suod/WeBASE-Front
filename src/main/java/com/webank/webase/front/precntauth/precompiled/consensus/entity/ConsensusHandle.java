@@ -16,11 +16,11 @@
 package com.webank.webase.front.precntauth.precompiled.consensus.entity;
 
 import com.webank.webase.front.base.code.ConstantCode;
-import lombok.Data;
-
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.math.BigInteger;
+import lombok.Data;
+import javax.validation.constraints.NotBlank;
+
+import javax.validation.constraints.NotNull;
 
 @Data
 public class ConsensusHandle {

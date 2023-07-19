@@ -18,15 +18,14 @@ package com.webank.webase.front.base.controller;
 
 import com.webank.webase.front.base.code.ConstantCode;
 import com.webank.webase.front.base.code.RetCode;
-import com.webank.webase.front.base.exception.FrontException;
 import com.webank.webase.front.base.response.BaseResponse;
+import com.webank.webase.front.base.exception.FrontException;
 import com.webank.webase.front.util.JsonUtils;
+import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
-
-import java.util.List;
 
 /**
  * BaseController.

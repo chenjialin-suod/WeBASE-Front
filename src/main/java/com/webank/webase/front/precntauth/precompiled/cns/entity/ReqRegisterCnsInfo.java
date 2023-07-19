@@ -1,8 +1,7 @@
 package com.webank.webase.front.precntauth.precompiled.cns.entity;
 
-import lombok.Data;
-
 import javax.validation.constraints.NotNull;
+import lombok.Data;
 
 @Data
 public class ReqRegisterCnsInfo {

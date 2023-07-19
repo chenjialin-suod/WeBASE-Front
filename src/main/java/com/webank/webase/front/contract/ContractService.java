@@ -13,6 +13,11 @@
  */
 package com.webank.webase.front.contract;
 
+import static org.fisco.solc.compiler.SolidityCompiler.Options.ABI;
+import static org.fisco.solc.compiler.SolidityCompiler.Options.BIN;
+import static org.fisco.solc.compiler.SolidityCompiler.Options.INTERFACE;
+import static org.fisco.solc.compiler.SolidityCompiler.Options.METADATA;
+
 import com.webank.webase.front.base.code.ConstantCode;
 import com.webank.webase.front.base.config.MySecurityManagerConfig;
 import com.webank.webase.front.base.enums.CompileStatus;
@@ -20,7 +25,24 @@ import com.webank.webase.front.base.enums.ContractStatus;
 import com.webank.webase.front.base.exception.FrontException;
 import com.webank.webase.front.base.properties.Constants;
 import com.webank.webase.front.base.response.BaseResponse;
-import com.webank.webase.front.contract.entity.*;
+import com.webank.webase.front.contract.entity.Cns;
+import com.webank.webase.front.contract.entity.Contract;
+import com.webank.webase.front.contract.entity.ContractPath;
+import com.webank.webase.front.contract.entity.ContractPathKey;
+import com.webank.webase.front.contract.entity.FileContentHandle;
+import com.webank.webase.front.contract.entity.ReqContractPath;
+import com.webank.webase.front.contract.entity.ReqContractSave;
+import com.webank.webase.front.contract.entity.ReqCopyContracts;
+import com.webank.webase.front.contract.entity.ReqDeploy;
+import com.webank.webase.front.contract.entity.ReqListContract;
+import com.webank.webase.front.contract.entity.ReqMultiContractCompile;
+import com.webank.webase.front.contract.entity.ReqPageContract;
+import com.webank.webase.front.contract.entity.ReqQueryCns;
+import com.webank.webase.front.contract.entity.ReqRegisterCns;
+import com.webank.webase.front.contract.entity.ReqSendAbi;
+import com.webank.webase.front.contract.entity.RspContractCompile;
+import com.webank.webase.front.contract.entity.RspContractNoAbi;
+import com.webank.webase.front.contract.entity.RspMultiContractCompile;
 import com.webank.webase.front.contract.entity.wasm.AbiBinInfo;
 import com.webank.webase.front.contract.entity.wasm.CompileTask;
 import com.webank.webase.front.contract.entity.wasm.CompileTaskRepository;
@@ -29,8 +51,30 @@ import com.webank.webase.front.precntauth.authmanager.everyone.EveryoneService;
 import com.webank.webase.front.precntauth.precompiled.cns.CNSServiceInWebase;
 import com.webank.webase.front.precntauth.precompiled.sysconf.SysConfigServiceInWebase;
 import com.webank.webase.front.transaction.TransService;
-import com.webank.webase.front.util.*;
+import com.webank.webase.front.util.CleanPathUtil;
+import com.webank.webase.front.util.CommonUtils;
+import com.webank.webase.front.util.ContractAbiUtil;
+import com.webank.webase.front.util.FrontUtils;
+import com.webank.webase.front.util.JsonUtils;
 import com.webank.webase.front.web3api.Web3ApiService;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FilenameFilter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.math.BigInteger;
+import java.time.Duration;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Base64;
+import java.util.List;
+import java.util.Objects;
+import java.util.concurrent.Future;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -63,23 +107,6 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
-import java.io.*;
-import java.math.BigInteger;
-import java.time.Duration;
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Base64;
-import java.util.List;
-import java.util.Objects;
-import java.util.concurrent.Future;
-
-import static org.fisco.solc.compiler.SolidityCompiler.Options.*;
 
 /**
  * contract management.
@@ -227,7 +254,7 @@ public class ContractService {
         String signUserId = req.getSignUserId();
         String abiStr = JsonUtils.objToString(req.getAbiInfo());
         String bytecodeBin = req.getBytecodeBin();
-        List<Object> params = req.getFuncParam() == null ? new ArrayList<>() : req.getFuncParam();
+        List<String> params = req.getFuncParam() == null ? new ArrayList<>() : req.getFuncParam();
         boolean isWasm = req.getIsWasm() != null && req.getIsWasm();
         String liquidAddress = "";
         if (isWasm) {
@@ -249,10 +276,10 @@ public class ContractService {
         ContractCodec abiCodec = new ContractCodec(web3ApiService.getCryptoSuite(groupId), isWasm);
         byte[] encodedConstructor;
         try {
-            encodedConstructor = abiCodec.encodeConstructor(abiStr, bytecodeBin, params);
+            encodedConstructor = abiCodec.encodeConstructorFromString(abiStr, bytecodeBin, params);
         } catch (ContractCodecException e) {
             log.error("deployWithSign encode fail:[]", e);
-            throw new FrontException(ConstantCode.CONTRACT_TYPE_ENCODED_ERROR);
+            throw new FrontException(ConstantCode.CONTRACT_TYPE_ENCODED_ERROR.getCode(), e.getMessage());
         }
 
         // data sign
@@ -289,7 +316,7 @@ public class ContractService {
         String userAddress = req.getUser();
         String abiStr = JsonUtils.objToString(req.getAbiInfo());
         String bytecodeBin = req.getBytecodeBin();
-        List<Object> params = req.getFuncParam() == null ? new ArrayList<>() : req.getFuncParam();
+        List<String> params = req.getFuncParam() == null ? new ArrayList<>() : req.getFuncParam();
         boolean isWasm = req.getIsWasm() != null && req.getIsWasm();
 
         Client client = web3ApiService.getWeb3j(groupId);
@@ -315,17 +342,17 @@ public class ContractService {
                     req.getContractAddress(), paramStrList, cryptoKeyPair);
             } catch (ContractCodecException e) {
                 log.error("deployLocally encode fail:[]", e);
-                throw new FrontException(ConstantCode.CONTRACT_TYPE_ENCODED_ERROR);
+                throw new FrontException(ConstantCode.CONTRACT_TYPE_ENCODED_ERROR.getCode(), e.getMessage());
             }
         } else {
             ContractCodec abiCodec = new ContractCodec(web3ApiService.getCryptoSuite(groupId),
                 req.getIsWasm());
             byte[] encodedConstructor;
             try {
-                encodedConstructor = abiCodec.encodeConstructor(abiStr, bytecodeBin, params);
+                encodedConstructor = abiCodec.encodeConstructorFromString(abiStr, bytecodeBin, params);
             } catch (ContractCodecException e) {
                 log.error("deployLocally encode fail:[]", e);
-                throw new FrontException(ConstantCode.CONTRACT_TYPE_ENCODED_ERROR);
+                throw new FrontException(ConstantCode.CONTRACT_TYPE_ENCODED_ERROR.getCode(), e.getMessage());
             }
             // get privateKey
             CryptoKeyPair cryptoKeyPair = keyStoreService.getCredentials(userAddress, groupId);
@@ -409,7 +436,7 @@ public class ContractService {
                 .createAssembleTransactionProcessor(client, cryptoKeyPair);
         } catch (Exception e) {
             log.error("deployContract getAssembleTransactionProcessor error:[]", e);
-            throw new FrontException(ConstantCode.CONTRACT_DEPLOY_ERROR);
+            throw new FrontException(ConstantCode.CONTRACT_DEPLOY_ERROR.getCode(), e.getMessage());
         }
         TransactionReceipt receipt = assembleTxProcessor.deployAndGetReceipt(encodedConstructor);
         transService.decodeReceipt(client, receipt);
@@ -442,7 +469,7 @@ public class ContractService {
                 .createAssembleTransactionProcessor(client, cryptoKeyPair);
         } catch (Exception e) {
             log.error("deployContract getAssembleTransactionProcessor error:[]", e);
-            throw new FrontException(ConstantCode.CONTRACT_DEPLOY_ERROR);
+            throw new FrontException(ConstantCode.CONTRACT_DEPLOY_ERROR.getCode(), e.getMessage());
         }
         TransactionResponse response =
             assembleTxProcessor.deployAndGetResponseWithStringParams(
@@ -679,7 +706,7 @@ public class ContractService {
      * @throws IOException
      */
     private void initDefaultContract(String groupId) throws IOException {
-        String contractPath = "conf/template";
+        String contractPath = "template";
         List<Contract> contracts =
             contractRepository.findByGroupIdAndContractPath(groupId, contractPath);
         // if no template contracts in db, load contract file in template; else, not load

@@ -14,6 +14,8 @@
 package com.webank.webase.front.precntauth.precompiled.sysconf;
 
 
+import static org.fisco.bcos.sdk.v3.contract.precompiled.sysconfig.SystemConfigPrecompiled.FUNC_SETVALUEBYKEY;
+
 import com.webank.webase.front.base.code.ConstantCode;
 import com.webank.webase.front.base.enums.PrecompiledTypes;
 import com.webank.webase.front.precntauth.precompiled.base.PrecompiledCommonInfo;
@@ -22,16 +24,13 @@ import com.webank.webase.front.precntauth.precompiled.sysconf.entity.ReqSetSysCo
 import com.webank.webase.front.transaction.TransService;
 import com.webank.webase.front.util.PrecompiledUtils;
 import com.webank.webase.front.web3api.Web3ApiService;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.fisco.bcos.sdk.v3.model.TransactionReceipt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.fisco.bcos.sdk.v3.contract.precompiled.sysconfig.SystemConfigPrecompiled.FUNC_SETVALUEBYKEY;
 
 /**
  *  Sys config service;
@@ -91,9 +90,9 @@ public class SysConfigServiceInWebase {
 
         // check system value
         // check gas limit
-        if (com.webank.webase.front.util.PrecompiledUtils.TxGasLimit.equals(key)) {
-            if (Long.parseLong(value) < com.webank.webase.front.util.PrecompiledUtils.TxGasLimitMin ||
-                Long.parseLong(value) > com.webank.webase.front.util.PrecompiledUtils.TxGasLimitMax) {
+        if (PrecompiledUtils.TxGasLimit.equals(key)) {
+            if (Long.parseLong(value) < PrecompiledUtils.TxGasLimitMin ||
+                Long.parseLong(value) > PrecompiledUtils.TxGasLimitMax) {
                 return ConstantCode.SET_SYSTEM_CONFIG_GAS_RANGE_ERROR;
             }
         }
@@ -104,7 +103,7 @@ public class SysConfigServiceInWebase {
     }
 
     public String setValueByKey(String groupId, String signUserId, String key, String value) {
-        List<Object> funcParams = new ArrayList<>();
+        List<String> funcParams = new ArrayList<>();
         funcParams.add(key);
         funcParams.add(value);
         // get address and abi of precompiled contract

@@ -15,12 +15,11 @@
  */
 package com.webank.webase.front.util.cmd;
 
-import lombok.extern.log4j.Log4j2;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import lombok.extern.log4j.Log4j2;
 
 /**
  * Consumes the output from the input stream and displays

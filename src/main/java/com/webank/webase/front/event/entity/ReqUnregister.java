@@ -18,8 +18,8 @@ package com.webank.webase.front.event.entity;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import javax.validation.constraints.NotEmpty;
+
 import javax.validation.constraints.NotNull;
 
 /**

@@ -16,11 +16,10 @@
 package com.webank.webase.front.contract;
 
 import com.webank.webase.front.contract.entity.Cns;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
-
-import java.util.List;
 
 public interface CnsRepository extends CrudRepository<Cns, Long>,
     JpaSpecificationExecutor<Cns> {

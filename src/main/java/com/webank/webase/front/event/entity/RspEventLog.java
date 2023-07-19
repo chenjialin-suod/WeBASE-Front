@@ -14,11 +14,10 @@
 
 package com.webank.webase.front.event.entity;
 
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.fisco.bcos.sdk.v3.model.EventLog;
-
-import java.util.List;
 
 @Data
 @AllArgsConstructor

@@ -13,28 +13,35 @@
  */
 package com.webank.webase.front.precntauth.authmanager.committee;
 
+import static org.fisco.bcos.sdk.v3.contract.auth.contracts.CommitteeManager.FUNC_CREATEMODIFYDEPLOYAUTHPROPOSAL;
+import static org.fisco.bcos.sdk.v3.contract.auth.contracts.CommitteeManager.FUNC_CREATERESETADMINPROPOSAL;
+import static org.fisco.bcos.sdk.v3.contract.auth.contracts.CommitteeManager.FUNC_CREATESETDEPLOYAUTHTYPEPROPOSAL;
+import static org.fisco.bcos.sdk.v3.contract.auth.contracts.CommitteeManager.FUNC_CREATESETRATEPROPOSAL;
+import static org.fisco.bcos.sdk.v3.contract.auth.contracts.CommitteeManager.FUNC_CREATEUPDATEGOVERNORPROPOSAL;
+import static org.fisco.bcos.sdk.v3.contract.auth.contracts.CommitteeManager.FUNC_REVOKEPROPOSAL;
+import static org.fisco.bcos.sdk.v3.contract.auth.contracts.CommitteeManager.FUNC_VOTEPROPOSAL;
+
 import com.webank.webase.front.base.code.ConstantCode;
 import com.webank.webase.front.base.enums.PrecompiledTypes;
+import com.webank.webase.front.base.exception.FrontException;
 import com.webank.webase.front.base.response.BaseResponse;
 import com.webank.webase.front.precntauth.precompiled.base.PrecompiledCommonInfo;
 import com.webank.webase.front.precntauth.precompiled.base.PrecompiledUtils;
 import com.webank.webase.front.transaction.TransService;
+import java.io.IOException;
+import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.fisco.bcos.sdk.v3.codec.ContractCodecException;
 import org.fisco.bcos.sdk.v3.contract.auth.contracts.CommitteeManager;
 import org.fisco.bcos.sdk.v3.model.RetCode;
 import org.fisco.bcos.sdk.v3.model.TransactionReceipt;
+import org.fisco.bcos.sdk.v3.transaction.codec.decode.ReceiptParser;
 import org.fisco.bcos.sdk.v3.transaction.model.exception.ContractException;
 import org.fisco.bcos.sdk.v3.transaction.model.exception.TransactionException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.io.IOException;
-import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.fisco.bcos.sdk.v3.contract.auth.contracts.CommitteeManager.*;
 
 /**
  * The service can be requested by committee
@@ -58,10 +65,10 @@ public class CommitteeService {
 
   public Object updateGovernorHandle(String groupId, String signUserId, String account,
       BigInteger weight) {
-    List<Object> funcParams = new ArrayList<>();
+    List<String> funcParams = new ArrayList<>();
     funcParams.add(account);
-    funcParams.add(weight);
-    funcParams.add(DEFAULT_BLOCK_NUMBER_INTERVAL);
+    funcParams.add(weight.toString(10));
+    funcParams.add(DEFAULT_BLOCK_NUMBER_INTERVAL.toString(10));
     String contractAddress = PrecompiledCommonInfo.getAddress(
         PrecompiledTypes.COMMITTEE_MANAGER);
     String abiStr = CommitteeManager.getABI();
@@ -81,10 +88,10 @@ public class CommitteeService {
 
   public Object setRateHandle(String groupId, String signUserId, BigInteger participatesRate,
       BigInteger winRate) throws ContractException {
-    List<Object> funcParams = new ArrayList<>();
-    funcParams.add(participatesRate);
-    funcParams.add(winRate);
-    funcParams.add(DEFAULT_BLOCK_NUMBER_INTERVAL);
+    List<String> funcParams = new ArrayList<>();
+    funcParams.add(participatesRate.toString(10));
+    funcParams.add(winRate.toString(10));
+    funcParams.add(DEFAULT_BLOCK_NUMBER_INTERVAL.toString(10));
     String contractAddress = PrecompiledCommonInfo.getAddress(
         PrecompiledTypes.COMMITTEE_MANAGER);
     String abiStr = CommitteeManager.getABI();
@@ -103,9 +110,9 @@ public class CommitteeService {
 
   public String setDeployAuthTypeHandle(String groupId, String signUserId,
       BigInteger deployAuthType) {
-    List<Object> funcParams = new ArrayList<>();
-    funcParams.add(deployAuthType);
-    funcParams.add(DEFAULT_BLOCK_NUMBER_INTERVAL);
+    List<String> funcParams = new ArrayList<>();
+    funcParams.add(deployAuthType.toString(10));
+    funcParams.add(DEFAULT_BLOCK_NUMBER_INTERVAL.toString(10));
     String contractAddress = PrecompiledCommonInfo.getAddress(
         PrecompiledTypes.COMMITTEE_MANAGER);
     String abiStr = CommitteeManager.getABI();
@@ -126,10 +133,10 @@ public class CommitteeService {
 
   public Object modifyDeployAuthHandle(String groupId, String signUserId, String userAddress,
       Boolean openFlag) {
-    List<Object> funcParams = new ArrayList<>();
+    List<String> funcParams = new ArrayList<>();
     funcParams.add(userAddress);
-    funcParams.add(openFlag);
-    funcParams.add(DEFAULT_BLOCK_NUMBER_INTERVAL);
+    funcParams.add(openFlag.toString());
+    funcParams.add(DEFAULT_BLOCK_NUMBER_INTERVAL.toString(10));
     String contractAddress = PrecompiledCommonInfo.getAddress(
         PrecompiledTypes.COMMITTEE_MANAGER);
     String abiStr = CommitteeManager.getABI();
@@ -150,10 +157,10 @@ public class CommitteeService {
 
   public Object resetAdminHandle(String groupId, String signUserId, String newAdmin,
       String contractAddr) {
-    List<Object> funcParams = new ArrayList<>();
+    List<String> funcParams = new ArrayList<>();
     funcParams.add(newAdmin);
     funcParams.add(contractAddr);
-    funcParams.add(DEFAULT_BLOCK_NUMBER_INTERVAL);
+    funcParams.add(DEFAULT_BLOCK_NUMBER_INTERVAL.toString(10));
     String contractAddress = PrecompiledCommonInfo.getAddress(
         PrecompiledTypes.COMMITTEE_MANAGER);
     String abiStr = CommitteeManager.getABI();
@@ -173,8 +180,8 @@ public class CommitteeService {
   }
 
   public Object revokeProposalHandle(String groupId, String signUserId, BigInteger proposalId) {
-    List<Object> funcParams = new ArrayList<>();
-    funcParams.add(proposalId);
+    List<String> funcParams = new ArrayList<>();
+    funcParams.add(proposalId.toString(10));
     String contractAddress = PrecompiledCommonInfo.getAddress(
         PrecompiledTypes.COMMITTEE_MANAGER);
     String abiStr = CommitteeManager.getABI();
@@ -196,9 +203,9 @@ public class CommitteeService {
 
   public String voteProposalHandle(String groupId, String signUserId, BigInteger proposalId,
       Boolean agree) {
-    List<Object> funcParams = new ArrayList<>();
-    funcParams.add(proposalId);
-    funcParams.add(agree);
+    List<String> funcParams = new ArrayList<>();
+    funcParams.add(proposalId.toString(10));
+    funcParams.add(agree.toString());
     String contractAddress = PrecompiledCommonInfo.getAddress(
         PrecompiledTypes.COMMITTEE_MANAGER);
     String abiStr = CommitteeManager.getABI();

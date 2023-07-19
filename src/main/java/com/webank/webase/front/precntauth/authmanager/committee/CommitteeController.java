@@ -1,9 +1,17 @@
 package com.webank.webase.front.precntauth.authmanager.committee;
 
-import com.webank.webase.front.precntauth.authmanager.committee.entity.*;
+import com.webank.webase.front.precntauth.authmanager.committee.entity.ReqDeployAuthTypeInfo;
+import com.webank.webase.front.precntauth.authmanager.committee.entity.ReqRevokeProposalInfo;
+import com.webank.webase.front.precntauth.authmanager.committee.entity.ReqVoteProposalInfo;
+import com.webank.webase.front.precntauth.authmanager.committee.entity.ReqResetAdminInfo;
+import com.webank.webase.front.precntauth.authmanager.committee.entity.ReqSetRateInfo;
+import com.webank.webase.front.precntauth.authmanager.committee.entity.ReqUpdateGovernorInfo;
+import com.webank.webase.front.precntauth.authmanager.committee.entity.ReqUsrDeployInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
+import java.io.IOException;
+import javax.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.fisco.bcos.sdk.v3.codec.ContractCodecException;
 import org.fisco.bcos.sdk.v3.transaction.model.exception.ContractException;
@@ -13,9 +21,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.validation.Valid;
-import java.io.IOException;
 
 
 @Api(value = "precntauth/authmanager/committee/", tags = "precntauth authmanager controller")

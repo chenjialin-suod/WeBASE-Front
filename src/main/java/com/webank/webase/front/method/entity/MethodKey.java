@@ -13,9 +13,8 @@
  */
 package com.webank.webase.front.method.entity;
 
-import lombok.Data;
-
 import java.io.Serializable;
+import lombok.Data;
 
 /**
  * Pk of table tb_method.

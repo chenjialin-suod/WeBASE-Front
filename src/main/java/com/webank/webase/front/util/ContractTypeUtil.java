@@ -15,15 +15,23 @@ package com.webank.webase.front.util;
 
 import com.webank.webase.front.base.code.ConstantCode;
 import com.webank.webase.front.base.exception.FrontException;
-import lombok.extern.slf4j.Slf4j;
-import org.fisco.bcos.sdk.v3.codec.datatypes.Address;
-import org.fisco.bcos.sdk.v3.codec.datatypes.*;
-import org.fisco.bcos.sdk.v3.codec.datatypes.generated.*;
-import org.fisco.bcos.sdk.v3.utils.Hex;
-
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.InvocationTargetException;
 import java.math.BigInteger;
+import lombok.extern.slf4j.Slf4j;
+import org.fisco.bcos.sdk.v3.codec.datatypes.Address;
+import org.fisco.bcos.sdk.v3.codec.datatypes.TypeReference;
+import org.fisco.bcos.sdk.v3.codec.datatypes.Bool;
+import org.fisco.bcos.sdk.v3.codec.datatypes.Bytes;
+import org.fisco.bcos.sdk.v3.codec.datatypes.BytesType;
+import org.fisco.bcos.sdk.v3.codec.datatypes.DynamicArray;
+import org.fisco.bcos.sdk.v3.codec.datatypes.DynamicBytes;
+import org.fisco.bcos.sdk.v3.codec.datatypes.NumericType;
+import org.fisco.bcos.sdk.v3.codec.datatypes.Type;
+import org.fisco.bcos.sdk.v3.codec.datatypes.Utf8String;
+import org.fisco.bcos.sdk.v3.codec.datatypes.generated.*;
+import org.fisco.bcos.sdk.v3.utils.Hex;
+import org.fisco.bcos.sdk.v3.utils.Numeric;
 
 /**
  * ContractTypeUtil.
@@ -69,7 +77,7 @@ public class ContractTypeUtil {
 
     /**
      * decodeResult.
-     *
+     * 
      * @param result result
      * @param type type
      * @return
@@ -160,10 +168,10 @@ public class ContractTypeUtil {
             throw new FrontException(ConstantCode.IN_FUNCPARAM_ERROR);
         }
     }
-
+    
     /**
      * decodeBytes.
-     *
+     * 
      * @param data data
      * @return
      */
@@ -189,7 +197,7 @@ public class ContractTypeUtil {
 
     /**
      * searchByte.
-     *
+     * 
      * @param data data
      * @param value value
      * @return

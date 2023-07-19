@@ -33,7 +33,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Objects;
@@ -48,7 +47,7 @@ import java.util.Objects;
 @RequestMapping("/abi")
 public class AbiController extends BaseController {
 
-    @Resource
+    @Autowired
     AbiService abiService;
 
     @ApiOperation(value = "getAbiListByGroupId",

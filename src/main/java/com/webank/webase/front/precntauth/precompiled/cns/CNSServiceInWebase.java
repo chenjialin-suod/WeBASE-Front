@@ -19,6 +19,8 @@ import com.webank.webase.front.precntauth.precompiled.cns.entity.CnsInfo;
 import com.webank.webase.front.precntauth.precompiled.cns.entity.ResCnsInfo;
 import com.webank.webase.front.transaction.TransService;
 import com.webank.webase.front.web3api.Web3ApiService;
+import java.util.List;
+import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
 import org.fisco.bcos.sdk.v3.codec.datatypes.generated.tuples.generated.Tuple2;
 import org.fisco.bcos.sdk.v3.contract.precompiled.bfs.BFSPrecompiled.BfsInfo;
@@ -26,9 +28,6 @@ import org.fisco.bcos.sdk.v3.model.TransactionReceipt;
 import org.fisco.bcos.sdk.v3.transaction.model.exception.ContractException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * CNS management service;

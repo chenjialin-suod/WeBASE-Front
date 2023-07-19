@@ -980,7 +980,7 @@
         <dependency>
             <groupId>org.fisco-bcos.java-sdk</groupId>
             <artifactId>fisco-bcos-java-sdk</artifactId>
-            <version>3.0.0</version>
+            <version>3.2.0</version>
             <scope>compile</scope>
             <exclusions>
                 <exclusion>

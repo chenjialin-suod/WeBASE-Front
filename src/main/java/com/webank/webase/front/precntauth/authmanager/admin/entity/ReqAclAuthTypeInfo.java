@@ -1,8 +1,7 @@
 package com.webank.webase.front.precntauth.authmanager.admin.entity;
 
-import lombok.Data;
-
 import java.math.BigInteger;
+import lombok.Data;
 
 @Data
 public class ReqAclAuthTypeInfo {

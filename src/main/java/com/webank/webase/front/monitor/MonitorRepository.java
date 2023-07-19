@@ -14,13 +14,12 @@
 package com.webank.webase.front.monitor;
 
 import com.webank.webase.front.monitor.entity.Monitor;
+import java.util.List;
+import javax.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
-
-import javax.transaction.Transactional;
-import java.util.List;
 
 public interface MonitorRepository
         extends CrudRepository<Monitor, Long>, JpaSpecificationExecutor<Monitor> {

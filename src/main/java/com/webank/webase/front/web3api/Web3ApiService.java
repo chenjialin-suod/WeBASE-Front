@@ -21,12 +21,14 @@ import com.webank.webase.front.util.JsonUtils;
 import com.webank.webase.front.web3api.entity.NodeStatusInfo;
 import com.webank.webase.front.web3api.entity.RspStatBlock;
 import com.webank.webase.front.web3api.entity.TransactionInfo;
+import java.time.Instant;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.fisco.bcos.sdk.v3.BcosSDK;
 import org.fisco.bcos.sdk.v3.client.Client;
 import org.fisco.bcos.sdk.v3.client.exceptions.ClientException;
 import org.fisco.bcos.sdk.v3.client.protocol.model.JsonTransactionResponse;
+import org.fisco.bcos.sdk.v3.client.protocol.response.BcosBlock;
 import org.fisco.bcos.sdk.v3.client.protocol.response.BcosBlock.Block;
 import org.fisco.bcos.sdk.v3.client.protocol.response.BcosGroupInfo.GroupInfo;
 import org.fisco.bcos.sdk.v3.client.protocol.response.BcosGroupNodeInfo.GroupNodeInfo;
@@ -36,8 +38,11 @@ import org.fisco.bcos.sdk.v3.client.protocol.response.Peers;
 import org.fisco.bcos.sdk.v3.client.protocol.response.SealerList.Sealer;
 import org.fisco.bcos.sdk.v3.client.protocol.response.SyncStatus.PeersInfo;
 import org.fisco.bcos.sdk.v3.client.protocol.response.SyncStatus.SyncStatusInfo;
+import org.fisco.bcos.sdk.v3.client.protocol.response.TotalTransactionCount;
 import org.fisco.bcos.sdk.v3.client.protocol.response.TotalTransactionCount.TransactionCountInfo;
+import org.fisco.bcos.sdk.v3.config.exceptions.ConfigException;
 import org.fisco.bcos.sdk.v3.crypto.CryptoSuite;
+import org.fisco.bcos.sdk.jni.common.JniException;
 import org.fisco.bcos.sdk.v3.model.TransactionReceipt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -45,7 +50,6 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigInteger;
 import java.time.Duration;
-import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
@@ -500,7 +504,7 @@ public class Web3ApiService {
             TransactionReceipt receipt = getTransactionReceipt(groupId, input);
 
             TransactionInfo transactionInfo = new TransactionInfo(txResponse,
-                receipt.getBlockNumber());
+                receipt.getBlockNumber().toString());
             return transactionInfo;
         }
         return null;

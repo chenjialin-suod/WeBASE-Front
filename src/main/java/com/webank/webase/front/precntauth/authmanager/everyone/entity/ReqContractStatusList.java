@@ -14,10 +14,9 @@
 
 package com.webank.webase.front.precntauth.authmanager.everyone.entity;
 
-import lombok.Data;
-
-import javax.validation.constraints.NotNull;
 import java.util.List;
+import javax.validation.constraints.NotNull;
+import lombok.Data;
 
 /**
  * batch query contract address list of contract status

@@ -22,14 +22,11 @@ import com.webank.webase.front.contract.entity.FileContentHandle;
 import com.webank.webase.front.util.CleanPathUtil;
 import com.webank.webase.front.util.CommonUtils;
 import com.webank.webase.front.util.ZipUtils;
-import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.stereotype.Service;
-
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -37,6 +34,12 @@ import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.stereotype.Service;
 
 /**
  * 1. get Front's sdk's certs(.crt) in /resource

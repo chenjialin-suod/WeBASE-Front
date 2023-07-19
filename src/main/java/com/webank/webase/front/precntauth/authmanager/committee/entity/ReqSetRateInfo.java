@@ -1,9 +1,8 @@
 package com.webank.webase.front.precntauth.authmanager.committee.entity;
 
-import lombok.Data;
-
-import javax.validation.constraints.NotBlank;
 import java.math.BigInteger;
+import lombok.Data;
+import javax.validation.constraints.NotBlank;
 
 @Data
 public class ReqSetRateInfo {

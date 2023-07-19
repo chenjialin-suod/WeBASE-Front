@@ -1,8 +1,7 @@
 package com.webank.webase.front.precntauth.authmanager.everyone.entity;
 
-import lombok.Data;
-
 import java.util.List;
+import lombok.Data;
 
 @Data
 public class NewProposalInfo {

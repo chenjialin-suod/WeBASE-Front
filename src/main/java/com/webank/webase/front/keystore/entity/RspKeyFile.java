@@ -14,10 +14,9 @@
 
 package com.webank.webase.front.keystore.entity;
 
+import java.util.Base64;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.Base64;
 
 @Data
 @NoArgsConstructor

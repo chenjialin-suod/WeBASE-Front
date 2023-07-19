@@ -19,6 +19,8 @@ import com.webank.webase.front.precntauth.authmanager.admin.entity.ReqContractSt
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
+import java.math.BigInteger;
+import javax.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.fisco.bcos.sdk.v3.transaction.model.exception.ContractException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,9 +28,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.validation.Valid;
-import java.math.BigInteger;
 
 @Api(value = "precntauth/authmanager/admin/", tags = "precntauth authmanager controller")
 @Slf4j

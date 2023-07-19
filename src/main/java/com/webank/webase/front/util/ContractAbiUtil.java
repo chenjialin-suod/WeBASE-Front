@@ -22,6 +22,17 @@ import com.squareup.javapoet.TypeName;
 import com.webank.webase.front.base.code.ConstantCode;
 import com.webank.webase.front.base.exception.FrontException;
 import com.webank.webase.front.base.properties.Constants;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.fisco.bcos.sdk.v3.codec.datatypes.DynamicArray;
@@ -31,13 +42,6 @@ import org.fisco.bcos.sdk.v3.codec.datatypes.TypeReference;
 import org.fisco.bcos.sdk.v3.codec.wrapper.ABIDefinition;
 import org.fisco.bcos.sdk.v3.codec.wrapper.ABIDefinition.NamedType;
 import org.fisco.bcos.sdk.v3.utils.ObjectMapperFactory;
-
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * ContractAbiUtil.

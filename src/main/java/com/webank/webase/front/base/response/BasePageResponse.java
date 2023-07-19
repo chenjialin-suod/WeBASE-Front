@@ -15,10 +15,10 @@
  */
 package com.webank.webase.front.base.response;
 
+import java.util.Collections;
+
 import com.webank.webase.front.base.code.RetCode;
 import lombok.Data;
-
-import java.util.Collections;
 
 /**
  * Entity class of page response info.

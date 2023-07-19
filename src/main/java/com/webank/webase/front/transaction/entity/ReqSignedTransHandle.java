@@ -15,9 +15,8 @@
  */
 package com.webank.webase.front.transaction.entity;
 
-import lombok.Data;
-
 import javax.validation.constraints.NotNull;
+import lombok.Data;
 
 /**
  * transHandler interface parameter.

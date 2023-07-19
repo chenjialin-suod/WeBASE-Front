@@ -1,18 +1,26 @@
 package com.webank.webase.front.precntauth.authmanager.everyone;
 
-import com.webank.webase.front.precntauth.authmanager.everyone.entity.*;
+import com.webank.webase.front.precntauth.authmanager.everyone.entity.ReqCheckMethodAuthInfo;
+import com.webank.webase.front.precntauth.authmanager.everyone.entity.ReqContractAdminInfo;
+import com.webank.webase.front.precntauth.authmanager.everyone.entity.ReqContractStatusList;
+import com.webank.webase.front.precntauth.authmanager.everyone.entity.ReqProposalInfo;
+import com.webank.webase.front.precntauth.authmanager.everyone.entity.ReqProposalListInfo;
+import com.webank.webase.front.precntauth.authmanager.everyone.entity.ReqUsrDeployAuthInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
-import lombok.extern.slf4j.Slf4j;
-import org.fisco.bcos.sdk.v3.transaction.model.exception.ContractException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
 import java.math.BigInteger;
 import java.util.List;
 import java.util.Map;
+import javax.validation.Valid;
+import lombok.extern.slf4j.Slf4j;
+import org.fisco.bcos.sdk.v3.transaction.model.exception.ContractException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @Api(value = "precntauth/authmanager/everyone/", tags = "precntauth authmanager controller")
 @Slf4j

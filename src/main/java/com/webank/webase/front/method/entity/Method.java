@@ -13,13 +13,12 @@
  */
 package com.webank.webase.front.method.entity;
 
-import lombok.Data;
-
+import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
-import java.io.Serializable;
+import lombok.Data;
 
 /**
  * Entity class of table tb_method.

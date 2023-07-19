@@ -16,7 +16,6 @@ package com.webank.webase.front.keystore.entity;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import javax.validation.constraints.NotBlank;
 
 @Data

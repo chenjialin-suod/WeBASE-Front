@@ -16,7 +16,6 @@
 package com.webank.webase.front.contract.entity;
 
 import lombok.Data;
-
 import javax.validation.constraints.NotBlank;
 
 @Data

@@ -13,15 +13,22 @@
  */
 package com.webank.webase.front.monitor;
 
+import static org.springframework.format.annotation.DateTimeFormat.ISO.DATE_TIME;
 import com.webank.webase.front.base.code.ConstantCode;
 import com.webank.webase.front.base.config.Web3Config;
 import com.webank.webase.front.base.exception.FrontException;
 import com.webank.webase.front.base.response.BasePageResponse;
+import com.webank.webase.front.monitor.entity.GroupSizeInfo;
 import com.webank.webase.front.monitor.entity.Monitor;
 import com.webank.webase.front.monitor.entity.PerformanceData;
+import com.webank.webase.front.util.CommonUtils;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import java.time.Duration;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -30,13 +37,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.time.Duration;
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.util.List;
-
-import static org.springframework.format.annotation.DateTimeFormat.ISO.DATE_TIME;
 
 /**
  * Node monitor controller distinguished from host monitor: performance

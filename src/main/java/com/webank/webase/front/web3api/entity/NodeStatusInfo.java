@@ -14,11 +14,10 @@
 package com.webank.webase.front.web3api.entity;
 
 import com.webank.webase.front.base.enums.NodeStatus;
+import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor

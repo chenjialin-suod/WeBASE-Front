@@ -15,14 +15,15 @@
  */
 package com.webank.webase.front.util;
 
-import lombok.extern.slf4j.Slf4j;
+import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.net.Socket;
+
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
-import java.io.IOException;
-import java.net.InetSocketAddress;
-import java.net.Socket;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * check port by telnet: if connection reachable, it means port in use

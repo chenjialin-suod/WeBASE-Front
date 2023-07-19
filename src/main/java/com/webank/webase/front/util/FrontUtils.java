@@ -13,14 +13,6 @@
  */
 package com.webank.webase.front.util;
 
-import lombok.extern.log4j.Log4j2;
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
 import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -32,6 +24,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+import lombok.extern.log4j.Log4j2;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 
 /**
  * comment method.

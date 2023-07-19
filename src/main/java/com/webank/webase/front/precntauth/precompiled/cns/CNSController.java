@@ -6,6 +6,7 @@ import com.webank.webase.front.precntauth.precompiled.cns.entity.ReqRegisterCnsI
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
+import javax.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.fisco.bcos.sdk.v3.transaction.model.exception.ContractException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.validation.Valid;
 
 @Api(value = "precntauth/precompiled/cns", tags = "precntauth precompiled controller")
 @Slf4j

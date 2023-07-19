@@ -1,10 +1,11 @@
 # server version
-version: v3.0.0
+version: v3.2.0
 
 server:
   port: 5002
   servlet:
     context-path: /WeBASE-Front
+  connection-timeout: 30000
   tomcat:
     max-threads: 200
     max-connections: 10000
@@ -21,8 +22,8 @@ spring:
     databaseName: db
     driverClassName: org.h2.Driver
     serverName:
-    username:
-    password:
+    username: root
+    password: Trasen@8812
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
     database: H2
@@ -43,7 +44,7 @@ spring:
       enabled: true
       path: /console
       settings:
-        web-allow-others: false
+        web-allow-others: true
         trace: true
   rabbitmq:
     host: 127.0.0.1

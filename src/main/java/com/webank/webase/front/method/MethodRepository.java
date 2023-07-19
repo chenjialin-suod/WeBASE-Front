@@ -15,10 +15,10 @@
  */
 package com.webank.webase.front.method;
 
-import com.webank.webase.front.method.entity.Method;
-import com.webank.webase.front.method.entity.MethodKey;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.repository.CrudRepository;
+import com.webank.webase.front.method.entity.Method;
+import com.webank.webase.front.method.entity.MethodKey;
 
 public interface MethodRepository extends CrudRepository<Method, MethodKey>,
     JpaSpecificationExecutor<Method> {

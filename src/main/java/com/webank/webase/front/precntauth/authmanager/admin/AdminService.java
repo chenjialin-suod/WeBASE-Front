@@ -13,6 +13,12 @@
  */
 package com.webank.webase.front.precntauth.authmanager.admin;
 
+import static org.fisco.bcos.sdk.v3.contract.auth.contracts.ContractAuthPrecompiled.FUNC_CLOSEMETHODAUTH;
+import static org.fisco.bcos.sdk.v3.contract.auth.contracts.ContractAuthPrecompiled.FUNC_OPENMETHODAUTH;
+import static org.fisco.bcos.sdk.v3.contract.auth.contracts.ContractAuthPrecompiled.FUNC_SETCONTRACTSTATUS;
+import static org.fisco.bcos.sdk.v3.contract.auth.contracts.ContractAuthPrecompiled.FUNC_SETMETHODAUTHTYPE;
+import static org.fisco.bcos.sdk.v3.contract.precompiled.sysconfig.SystemConfigPrecompiled.FUNC_SETVALUEBYKEY;
+
 import com.webank.webase.front.base.code.ConstantCode;
 import com.webank.webase.front.base.enums.PrecompiledTypes;
 import com.webank.webase.front.base.exception.FrontException;
@@ -22,20 +28,18 @@ import com.webank.webase.front.precntauth.precompiled.base.PrecompiledUtils;
 import com.webank.webase.front.transaction.TransService;
 import com.webank.webase.front.util.CommonUtils;
 import com.webank.webase.front.web3api.Web3ApiService;
-import lombok.extern.slf4j.Slf4j;
-import org.fisco.bcos.sdk.v3.contract.auth.contracts.ContractAuthPrecompiled;
-import org.fisco.bcos.sdk.v3.model.RetCode;
-import org.fisco.bcos.sdk.v3.model.TransactionReceipt;
-import org.fisco.bcos.sdk.v3.transaction.model.exception.ContractException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import static org.fisco.bcos.sdk.v3.contract.auth.contracts.ContractAuthPrecompiled.*;
+import lombok.extern.slf4j.Slf4j;
+import org.fisco.bcos.sdk.v3.contract.auth.contracts.ContractAuthPrecompiled;
+import org.fisco.bcos.sdk.v3.model.RetCode;
+import org.fisco.bcos.sdk.v3.model.TransactionReceipt;
+import org.fisco.bcos.sdk.v3.transaction.codec.decode.ReceiptParser;
+import org.fisco.bcos.sdk.v3.transaction.model.exception.ContractException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  * The service can be requested by admin;
@@ -61,14 +65,14 @@ public class AdminService {
 
   public Object setMethodAuthTypeHandle(String groupId, String signUserId, String contractAddr,
       byte[] func, BigInteger authType) {
-    List<Object> funcParams = new ArrayList<>();
+    List<String> funcParams = new ArrayList<>();
     funcParams.add(contractAddr);
     byte[] hash = web3ApiService.getWeb3j(groupId).getCryptoSuite().hash(func);
     byte[] Func = Arrays.copyOfRange(hash, 0, 4);
     //byte[] to 0xFF
     String newFunc = CommonUtils.parseByte2HexStr(Func);
     funcParams.add(newFunc);
-    funcParams.add(authType);
+    funcParams.add(authType.toString(10));
     String contractAddress = PrecompiledCommonInfo.getAddress(
         PrecompiledTypes.CONTRACT_AUTH);
     String abiStr = ContractAuthPrecompiled.getABI();
@@ -90,7 +94,7 @@ public class AdminService {
   public Object setMethodAuthHandle(String groupId, String signUserId, String contractAddr,
       byte[] func, String accountAddress, Boolean bool) {
     TransactionReceipt receipt;
-    List<Object> funcParams = new ArrayList<>();
+    List<String> funcParams = new ArrayList<>();
     funcParams.add(contractAddr);
     byte[] hash = web3ApiService.getWeb3j(groupId).getCryptoSuite().hash(func);
     byte[] Func = Arrays.copyOfRange(hash, 0, 4);
@@ -117,9 +121,9 @@ public class AdminService {
   public String setContractStatus(String groupId, String signUserId,
       String contractAddress, boolean isFreeze) {
 
-    List<Object> funcParams = new ArrayList<>();
+    List<String> funcParams = new ArrayList<>();
     funcParams.add(contractAddress);
-    funcParams.add(isFreeze);
+    funcParams.add(String.valueOf(isFreeze));
     // get address and abi of precompiled contract
     String precompiledAddress = PrecompiledCommonInfo.getAddress(PrecompiledTypes.CONTRACT_AUTH);
     if (!web3ApiService.getWeb3j(groupId).isAuthCheck()) {

@@ -3,10 +3,10 @@ package com.webank.webase.front.transaction.entity;
 import lombok.Builder;
 import lombok.Data;
 import lombok.experimental.Accessors;
-import org.fisco.bcos.sdk.v3.codec.datatypes.Type;
-import org.fisco.bcos.sdk.v3.codec.datatypes.TypeReference;
 
 import java.util.List;
+import org.fisco.bcos.sdk.v3.codec.datatypes.TypeReference;
+import org.fisco.bcos.sdk.v3.codec.datatypes.Type;
 
 /**
  * abi's function information.

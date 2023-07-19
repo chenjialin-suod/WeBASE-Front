@@ -13,17 +13,21 @@
  */
 package com.webank.webase.front.monitor.entity;
 
-import lombok.Data;
-
-import javax.persistence.*;
 import java.math.BigInteger;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Index;
+import javax.persistence.Table;
+import lombok.Data;
 
 /**
  * entity of Node Monitor in db
  */
 @Data
 @Entity
-@Table(indexes = {@Index(columnList = "groupId", name = "idx_group", unique = true)})
+@Table(indexes = {@Index(columnList = "groupId", name = "idx_group", unique = false)})
 public class Monitor {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

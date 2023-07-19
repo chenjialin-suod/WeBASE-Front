@@ -15,8 +15,8 @@
  */
 package com.webank.webase.front.precntauth.precompiled.sysconf;
 
-import com.webank.webase.front.base.code.ConstantCode;
 import com.webank.webase.front.base.response.BaseResponse;
+import com.webank.webase.front.base.code.ConstantCode;
 import com.webank.webase.front.precntauth.precompiled.sysconf.entity.ReqSetSysConfigInfo;
 import com.webank.webase.front.util.PrecompiledUtils;
 import io.swagger.annotations.Api;

@@ -16,12 +16,11 @@
 package com.webank.webase.front.contract.entity;
 
 import com.webank.webase.front.base.code.ConstantCode;
-import lombok.Data;
-
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import java.util.ArrayList;
 import java.util.List;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import lombok.Data;
 
 /**
  * deploy interface parameter.
@@ -54,7 +53,7 @@ public class ReqDeploy {
     private String contractPath;
     private String groupId;
     private Long contractId;
-    private List<Object> funcParam = new ArrayList<>();
+    private List<String> funcParam = new ArrayList<>();
     @Deprecated
     private boolean useAes;
     @Deprecated

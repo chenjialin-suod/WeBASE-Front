@@ -21,6 +21,8 @@ import com.webank.webase.front.precntauth.precompiled.base.PrecompiledCommonInfo
 import com.webank.webase.front.precntauth.precompiled.base.PrecompiledUtils;
 import com.webank.webase.front.transaction.TransService;
 import com.webank.webase.front.web3api.Web3ApiService;
+import java.util.ArrayList;
+import java.util.List;
 import org.fisco.bcos.sdk.v3.contract.precompiled.bfs.BFSPrecompiled;
 import org.fisco.bcos.sdk.v3.contract.precompiled.bfs.BFSPrecompiled.BfsInfo;
 import org.fisco.bcos.sdk.v3.contract.precompiled.bfs.BFSService;
@@ -29,9 +31,6 @@ import org.fisco.bcos.sdk.v3.model.TransactionReceipt;
 import org.fisco.bcos.sdk.v3.transaction.model.exception.ContractException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * BFS service;
@@ -51,7 +50,7 @@ public class BFSServiceInWebase {
    * BFS创建某个目录
    */
   public Object mkdir(String groupId, String path, String signUserId) {
-    List<Object> funcParams = new ArrayList<>();
+    List<String> funcParams = new ArrayList<>();
     funcParams.add(path);
     String contractAddress;
     boolean isWasm = web3ApiService.getWeb3j(groupId).isWASM();
@@ -84,7 +83,7 @@ public class BFSServiceInWebase {
   public String link(String groupId, String signUserId, String contractName,
       String contractVersion,
       String contractAddress, String abiData) {
-    List<Object> funcParams = new ArrayList<>();
+    List<String> funcParams = new ArrayList<>();
     funcParams.add(contractName);
     funcParams.add(contractVersion);
     funcParams.add(contractAddress);

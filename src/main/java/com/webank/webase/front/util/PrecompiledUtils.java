@@ -16,6 +16,7 @@
 package com.webank.webase.front.util;
 
 import org.apache.commons.lang3.StringUtils;
+import org.fisco.bcos.sdk.v3.model.PrecompiledConstant;
 
 /**
  * Constants and tool function related with Precompiled module

@@ -15,17 +15,19 @@
  */
 package com.webank.webase.front.util;
 
-import com.webank.webase.front.base.properties.Constants;
-import lombok.extern.log4j.Log4j2;
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
-import java.nio.charset.StandardCharsets;
-import java.util.Base64;
+
+import com.webank.webase.front.base.properties.Constants;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import lombok.extern.log4j.Log4j2;
 
 /**
  * 落盘加密相关，请参考FISCO-BCOS文档

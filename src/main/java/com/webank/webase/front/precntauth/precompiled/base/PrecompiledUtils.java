@@ -3,6 +3,11 @@ package com.webank.webase.front.precntauth.precompiled.base;
 import com.webank.webase.front.base.code.ConstantCode;
 import com.webank.webase.front.base.exception.FrontException;
 import com.webank.webase.front.base.response.BaseResponse;
+import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Stack;
 import lombok.extern.slf4j.Slf4j;
 import org.fisco.bcos.sdk.v3.codec.FunctionReturnDecoderInterface;
 import org.fisco.bcos.sdk.v3.codec.Utils;
@@ -14,12 +19,6 @@ import org.fisco.bcos.sdk.v3.model.RetCode;
 import org.fisco.bcos.sdk.v3.model.TransactionReceipt;
 import org.fisco.bcos.sdk.v3.transaction.codec.decode.ReceiptParser;
 import org.fisco.bcos.sdk.v3.transaction.model.exception.ContractException;
-
-import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Stack;
 
 @Slf4j
 public class PrecompiledUtils {

@@ -14,11 +14,10 @@
 package com.webank.webase.front.contract.entity;
 
 import com.webank.webase.front.base.code.ConstantCode;
+import java.util.List;
+import javax.validation.constraints.NotEmpty;
 import lombok.Data;
 import org.fisco.bcos.sdk.v3.codec.wrapper.ABIDefinition;
-
-import javax.validation.constraints.NotEmpty;
-import java.util.List;
 
 
 /**

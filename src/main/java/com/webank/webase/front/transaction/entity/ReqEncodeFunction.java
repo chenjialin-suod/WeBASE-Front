@@ -14,11 +14,10 @@
 
 package com.webank.webase.front.transaction.entity;
 
-import lombok.Data;
-
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.util.List;
+import javax.validation.constraints.NotNull;
+import lombok.Data;
+import javax.validation.constraints.NotBlank;
 
 /**
  * get encoded function string
@@ -31,7 +30,7 @@ public class ReqEncodeFunction {
     @NotNull
     private List<Object> contractAbi;
     @NotNull
-    private List<Object> funcParam;
+    private List<String> funcParam;
     @NotBlank
     private String groupId;
     private Boolean isWasm = false;

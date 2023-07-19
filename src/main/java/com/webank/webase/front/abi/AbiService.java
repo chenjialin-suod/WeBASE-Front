@@ -25,6 +25,7 @@ import com.webank.webase.front.method.MethodService;
 import com.webank.webase.front.util.FrontUtils;
 import com.webank.webase.front.util.JsonUtils;
 import com.webank.webase.front.web3api.Web3ApiService;
+import java.util.ArrayList;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
@@ -35,7 +36,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigInteger;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 

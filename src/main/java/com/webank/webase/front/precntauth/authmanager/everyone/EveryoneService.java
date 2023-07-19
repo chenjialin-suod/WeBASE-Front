@@ -19,6 +19,12 @@ import com.webank.webase.front.precntauth.authmanager.everyone.entity.NewProposa
 import com.webank.webase.front.precntauth.authmanager.everyone.entity.ReqProposalListInfo;
 import com.webank.webase.front.precntauth.authmanager.util.AuthManagerService;
 import com.webank.webase.front.web3api.Web3ApiService;
+import java.math.BigInteger;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
 import org.fisco.bcos.sdk.v3.contract.auth.manager.AuthManager;
 import org.fisco.bcos.sdk.v3.contract.auth.po.ProposalInfo;
@@ -27,9 +33,6 @@ import org.fisco.bcos.sdk.v3.contract.auth.po.ProposalType;
 import org.fisco.bcos.sdk.v3.transaction.model.exception.ContractException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.math.BigInteger;
-import java.util.*;
 
 /**
  * The service can be requested by everyone

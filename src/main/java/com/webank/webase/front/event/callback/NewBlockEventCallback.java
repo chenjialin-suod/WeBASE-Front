@@ -20,14 +20,13 @@ import com.webank.webase.front.base.enums.EventTypes;
 import com.webank.webase.front.event.MQPublisher;
 import com.webank.webase.front.event.entity.PublisherHelper;
 import com.webank.webase.front.event.entity.message.BlockPushMessage;
+import java.math.BigInteger;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Setter;
 import org.fisco.bcos.sdk.jni.BlockNotifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.math.BigInteger;
 
 /**
  * 出块后将Push一个信息到RabbitMQ，并广播到订阅者的队列中

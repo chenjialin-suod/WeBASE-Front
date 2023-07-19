@@ -15,6 +15,7 @@
  */
 package com.webank.webase.front.contract.entity.wasm;
 
+import com.webank.webase.front.contract.entity.ContractPathKey;
 import lombok.Data;
 
 import javax.persistence.Column;

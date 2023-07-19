@@ -14,10 +14,9 @@
 
 package com.webank.webase.front.tool.entity;
 
-import lombok.Data;
-
-import javax.validation.constraints.NotNull;
 import java.util.List;
+import javax.validation.constraints.NotNull;
+import lombok.Data;
 
 /**
  * decode tx receipt's input/output

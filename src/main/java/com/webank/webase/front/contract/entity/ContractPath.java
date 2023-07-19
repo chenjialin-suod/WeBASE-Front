@@ -15,13 +15,12 @@
  */
 package com.webank.webase.front.contract.entity;
 
-import lombok.Data;
-
+import java.io.Serializable;
+import java.time.LocalDateTime;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
-import java.io.Serializable;
-import java.time.LocalDateTime;
+import lombok.Data;
 
 /**
  * Entity of contract path in web solidity IDE in db(using h2.db)

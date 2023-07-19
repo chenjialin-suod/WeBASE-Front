@@ -70,7 +70,7 @@ package com.webank.webase.front.precntauth.precompiled.crud;///*
 //
 //  public String createTableHandle(String groupId, String signUserId, String tableName,
 //      String keyFieldName, List<String> valueFields) {
-//    List<Object> funcParams = new ArrayList<>();
+//    List<String> funcParams = new ArrayList<>();
 //    funcParams.add(tableName);
 //    funcParams.add(keyFieldName);
 //    String valueFieldsString = convertValueFieldsToString(valueFields);
@@ -109,7 +109,7 @@ package com.webank.webase.front.precntauth.precompiled.crud;///*
 //
 //  public String setHandle(String groupId, String signUserId, String tableName, String key,
 //      Map<String, String> fieldNameToValue) {
-//    List<Object> funcParams = new ArrayList<>();
+//    List<String> funcParams = new ArrayList<>();
 //    funcParams.add(tableName);
 //    funcParams.add(key);
 //    Entry entry = new Entry(Collections.emptyList(), key, fieldNameToValue); // todo check

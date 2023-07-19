@@ -14,9 +14,8 @@
 
 package com.webank.webase.front.contract.entity;
 
-import lombok.Data;
-
 import java.util.List;
+import lombok.Data;
 
 /**
  * for contract IDE

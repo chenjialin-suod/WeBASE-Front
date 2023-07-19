@@ -14,14 +14,13 @@
 
 package com.webank.webase.front.util;
 
-import lombok.extern.slf4j.Slf4j;
-
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author marsli

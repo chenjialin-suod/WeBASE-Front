@@ -15,10 +15,8 @@
  */
 package com.webank.webase.front.util;
 
-import org.fisco.bcos.sdk.v3.codec.datatypes.Bool;
-import org.fisco.bcos.sdk.v3.codec.datatypes.DynamicBytes;
+import org.fisco.bcos.sdk.v3.codec.datatypes.*;
 import org.fisco.bcos.sdk.v3.codec.datatypes.Type;
-import org.fisco.bcos.sdk.v3.codec.datatypes.Utf8String;
 import org.fisco.bcos.sdk.v3.codec.datatypes.generated.*;
 
 /**

@@ -1,9 +1,8 @@
 package com.webank.webase.front.precntauth.authmanager.committee.entity;
 
-import lombok.Data;
-
-import javax.validation.constraints.NotNull;
 import java.math.BigInteger;
+import javax.validation.constraints.NotNull;
+import lombok.Data;
 
 @Data
 public class ReqRevokeProposalInfo {

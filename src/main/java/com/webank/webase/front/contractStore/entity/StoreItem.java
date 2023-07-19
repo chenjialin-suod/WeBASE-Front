@@ -1,7 +1,6 @@
 package com.webank.webase.front.contractStore.entity;
 
 import lombok.Data;
-
 import javax.persistence.*;
 import java.time.LocalDateTime;
 

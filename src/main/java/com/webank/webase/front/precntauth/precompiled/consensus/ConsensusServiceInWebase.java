@@ -13,28 +13,35 @@
  */
 package com.webank.webase.front.precntauth.precompiled.consensus;
 
+import static com.webank.webase.front.util.PrecompiledUtils.NODE_TYPE_OBSERVER;
+import static com.webank.webase.front.util.PrecompiledUtils.NODE_TYPE_REMOVE;
+import static com.webank.webase.front.util.PrecompiledUtils.NODE_TYPE_SEALER;
+import static org.fisco.bcos.sdk.v3.contract.precompiled.consensus.ConsensusPrecompiled.FUNC_ADDOBSERVER;
+import static org.fisco.bcos.sdk.v3.contract.precompiled.consensus.ConsensusPrecompiled.FUNC_ADDSEALER;
+import static org.fisco.bcos.sdk.v3.contract.precompiled.consensus.ConsensusPrecompiled.FUNC_REMOVE;
+
 import com.webank.webase.front.base.code.ConstantCode;
 import com.webank.webase.front.base.enums.PrecompiledTypes;
 import com.webank.webase.front.base.exception.FrontException;
+import com.webank.webase.front.base.response.BaseResponse;
 import com.webank.webase.front.precntauth.precompiled.base.PrecompiledCommonInfo;
 import com.webank.webase.front.precntauth.precompiled.base.PrecompiledUtils;
 import com.webank.webase.front.precntauth.precompiled.consensus.entity.NodeInfo;
 import com.webank.webase.front.transaction.TransService;
 import com.webank.webase.front.web3api.Web3ApiService;
-import lombok.extern.slf4j.Slf4j;
-import org.fisco.bcos.sdk.v3.client.protocol.response.SealerList.Sealer;
-import org.fisco.bcos.sdk.v3.model.PrecompiledRetCode;
-import org.fisco.bcos.sdk.v3.model.TransactionReceipt;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import static com.webank.webase.front.util.PrecompiledUtils.*;
-import static org.fisco.bcos.sdk.v3.contract.precompiled.consensus.ConsensusPrecompiled.*;
+import lombok.extern.slf4j.Slf4j;
+import org.fisco.bcos.sdk.v3.client.protocol.response.SealerList.Sealer;
+import org.fisco.bcos.sdk.v3.model.PrecompiledRetCode;
+import org.fisco.bcos.sdk.v3.model.RetCode;
+import org.fisco.bcos.sdk.v3.model.TransactionReceipt;
+import org.fisco.bcos.sdk.v3.transaction.codec.decode.ReceiptParser;
+import org.fisco.bcos.sdk.v3.transaction.model.exception.ContractException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  *  Node consensus status service;
@@ -74,9 +81,9 @@ public class ConsensusServiceInWebase {
 
   public String addSealerHandle(String groupId, String signUserId, String nodeId,
       BigInteger weight) {
-    List<Object> funcParams = new ArrayList<>();
+    List<String> funcParams = new ArrayList<>();
     funcParams.add(nodeId);
-    funcParams.add(weight);
+    funcParams.add(weight.toString(10));
     String contractAddress;
     boolean isWasm = web3ApiService.getWeb3j(groupId).isWASM();
     if (isWasm) {
@@ -136,7 +143,7 @@ public class ConsensusServiceInWebase {
 
   private String addObserverHandle(String groupId, String signUserId, String nodeId) {
     // trans
-    List<Object> funcParams = new ArrayList<>();
+    List<String> funcParams = new ArrayList<>();
     funcParams.add(nodeId);
     String contractAddress;
     boolean isWasm = web3ApiService.getWeb3j(groupId).isWASM();
@@ -158,7 +165,7 @@ public class ConsensusServiceInWebase {
       return ConstantCode.ALREADY_REMOVED_FROM_THE_GROUP.toString();
     }
     // trans
-    List<Object> funcParams = new ArrayList<>();
+    List<String> funcParams = new ArrayList<>();
     funcParams.add(nodeId);
     String contractAddress;
     boolean isWasm = web3ApiService.getWeb3j(groupId).isWASM();

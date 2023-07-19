@@ -15,10 +15,22 @@
  */
 package com.webank.webase.front.transaction;
 
+import static com.webank.webase.front.base.code.ConstantCode.CONTRACT_ADDRESS_INVALID;
+import static com.webank.webase.front.base.code.ConstantCode.ENCODE_STR_CANNOT_BE_NULL;
+import static com.webank.webase.front.base.code.ConstantCode.INVALID_VERSION;
+import static com.webank.webase.front.base.code.ConstantCode.PARAM_ADDRESS_IS_INVALID;
+import static com.webank.webase.front.base.code.ConstantCode.PARAM_FAIL_CNS_NAME_IS_EMPTY;
+import static com.webank.webase.front.base.code.ConstantCode.VERSION_AND_ADDRESS_CANNOT_ALL_BE_NULL;
+
 import com.webank.webase.front.base.code.ConstantCode;
 import com.webank.webase.front.base.controller.BaseController;
 import com.webank.webase.front.base.exception.FrontException;
-import com.webank.webase.front.transaction.entity.*;
+import com.webank.webase.front.transaction.entity.ReqEncodeFunction;
+import com.webank.webase.front.transaction.entity.ReqQueryTransHandle;
+import com.webank.webase.front.transaction.entity.ReqSignMessageHash;
+import com.webank.webase.front.transaction.entity.ReqSignedTransHandle;
+import com.webank.webase.front.transaction.entity.ReqTransHandle;
+import com.webank.webase.front.transaction.entity.ReqTransHandleWithSign;
 import com.webank.webase.front.util.Address;
 import com.webank.webase.front.util.CommonUtils;
 import com.webank.webase.front.util.JsonUtils;
@@ -26,6 +38,10 @@ import com.webank.webase.front.util.PrecompiledUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
+import java.time.Duration;
+import java.time.Instant;
+import java.util.List;
+import javax.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.fisco.bcos.sdk.v3.model.TransactionReceipt;
@@ -33,17 +49,7 @@ import org.fisco.bcos.sdk.v3.utils.Hex;
 import org.fisco.bcos.sdk.v3.utils.Numeric;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import javax.validation.Valid;
-import java.time.Duration;
-import java.time.Instant;
-import java.util.List;
-
-import static com.webank.webase.front.base.code.ConstantCode.*;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * TransController.
@@ -196,7 +202,6 @@ public class TransController extends BaseController {
     @PostMapping("/signMessageHashExternal")
     public Object signMessageHashExternal(@Valid @RequestBody ReqSignMessageHash reqSignMessageHash, BindingResult result) {
         log.info("transHandleLocal start. ReqTransHandle:[{}]", JsonUtils.toJSONString(reqSignMessageHash));
-//        checkParamResult(result);
         Instant startTime = Instant.now();
         log.info("signMessageHashExternal start startTime:{}", startTime.toEpochMilli());
 

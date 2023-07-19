@@ -13,21 +13,25 @@
  */
 package com.webank.webase.front.method;
 
-import com.webank.webase.front.base.code.ConstantCode;
-import com.webank.webase.front.base.controller.BaseController;
-import com.webank.webase.front.base.exception.FrontException;
-import com.webank.webase.front.base.response.BaseResponse;
-import com.webank.webase.front.method.entity.Method;
-import com.webank.webase.front.method.entity.NewMethodInputParamHandle;
 import com.webank.webase.front.util.JsonUtils;
-import lombok.extern.log4j.Log4j2;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
 import java.time.Duration;
 import java.time.Instant;
+import javax.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import com.webank.webase.front.base.controller.BaseController;
+import com.webank.webase.front.base.response.BaseResponse;
+import com.webank.webase.front.base.code.ConstantCode;
+import com.webank.webase.front.base.exception.FrontException;
+import com.webank.webase.front.method.entity.NewMethodInputParamHandle;
+import com.webank.webase.front.method.entity.Method;
+import lombok.extern.log4j.Log4j2;
 
 /**
  * Method controller
